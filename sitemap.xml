@@ -6,7 +6,7 @@
     </url>
     <url>
         <loc>http://shenal.github.io/</loc>
-        <lastmod>2013-08-05T00:12:17+05:30</lastmod>
+        <lastmod>2013-08-05T00:15:31+05:30</lastmod>
     </url>
     <url>
         <loc>http://shenal.github.io/robots.txt</loc>
@@ -14,6 +14,10 @@
     </url>
     <url>
         <loc>http://shenal.github.io/blog/archives/</loc>
+        <lastmod>2013-08-05T00:12:17+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://shenal.github.io/blog/</loc>
         <lastmod>2013-08-05T00:12:17+05:30</lastmod>
     </url>
 </urlset>
