@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Shenal Silva's Blog]]></title>
-  <link href="http://shenal.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: poems | Shenal Silva's Blog]]></title>
+  <link href="http://shenal.github.io/blog/categories/poems/atom.xml" rel="self"/>
   <link href="http://shenal.github.io/"/>
   <updated>2013-08-05T00:45:41+05:30</updated>
   <id>http://shenal.github.io/</id>
