@@ -1,0 +1,108 @@
+mac {
+    LIBS += -L/usr/local/lib
+    INCLUDEPATH += /usr/local/include
+}
+
+CONFIG( taglib ) {
+    CONFIG += link_pkgconfig
+    PKGCONFIG += taglib
+    win32:debug:LIBS += tagd.lib    # tagd.lib will precede PKGCONFIG added libs
+}
+
+CONFIG( ffmpeg ) {
+    DEFINES += FFMPEG_FINGERPRINTING
+
+    mac {
+        LIBS += /usr/local/lib/libavcodec.dylib
+        LIBS += /usr/local/lib/libavformat.dylib
+        LIBS += /usr/local/lib/libavutil.dylib
+        LIBS += /usr/local/lib/libswresample.dylib
+    } else {
+        CONFIG += link_pkgconfig
+        PKGCONFIG += libavformat libavcodec libavutil
+        packagesExist(libswresample) {
+            PKGCONFIG += libswresample
+            DEFINES += HAVE_SWRESAMPLE
+        }
+    }
+
+    win32:CONFIG(debug, debug|release) {
+        # disable fingerprinting on windows debug
+        # the pre-built ffmpeg we use is incompatible with debug builds
+        # because the crt it links against is incompatible
+        PKGCONFIG -= libavformat
+        PKGCONFIG -= libswresample
+        DEFINES -= FFMPEG_FINGERPRINTING
+    }
+}
+
+CONFIG( boost ) {
+    mac:CONFIG(app_bundle){
+        LIBS += /usr/local/lib/libboost_thread-mt.a
+    }
+    else:unix {
+        LIBS += -lboost_thread-mt
+    }
+}
+
+CONFIG( break ) {
+    win32{
+        CONFIG += link_pkgconfig
+        PKGCONFIG += breakpad
+        LIBS += wininet.lib
+    }
+    else:mac{
+        LIBS += -framework Breakpad
+    }
+}
+
+CONFIG( growl ) {
+    mac {
+        LIBS += -framework Growl
+    }
+}
+
+CONFIG( phonon ) {
+    mac:exists( /usr/local/Cellar/kde-phonon/4.6.0/lib/libphonon.dylib ) {
+        # Prefer to use the specific phonon we build ourselves than the old one ditributed with Qt
+        LIBS += /usr/local/Cellar/kde-phonon/4.6.0/lib/libphonon.dylib
+    }
+    else:win32 {
+        CONFIG += link_pkgconfig
+        PKGCONFIG += phonon
+    }
+	else {
+		QT += phonon
+	}
+}
+
+CONFIG( sparkle ) {
+    win32{
+        CONFIG += link_pkgconfig
+        PKGCONFIG += winsparkle
+    }
+    else:mac{
+        LIBS += -framework Sparkle
+    }
+}
+
+CONFIG( sqlite3 ) {
+    win32 {
+        CONFIG += link_pkgconfig
+        PKGCONFIG += sqlite3
+    }
+    else:LIBS += -lsqlite3
+}
+
+CONFIG( yajl ) {
+	win32 {
+		CONFIG += link_pkgconfig
+		debug:PKGCONFIG += yajl-debug
+		release:PKGCONFIG += yajl-release
+	}
+	else:CONFIG(app_bundle) {
+                LIBS += /usr/local/lib/libyajl_s.a
+	}
+	else:LIBS += -lyajl
+}
+

@@ -1,0 +1,57 @@
+/*
+   Copyright 2005-2009 Last.fm Ltd. 
+      - Primarily authored by Max Howell, Jono Cole and Doug Mansell
+
+   This file is part of the Last.fm Desktop Application Suite.
+
+   lastfm-desktop is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   lastfm-desktop is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with lastfm-desktop.  If not, see <http://www.gnu.org/licenses/>.
+*/
+#ifndef QT_OVERRIDE_QDEBUG
+#define QT_OVERRIDE_QDEBUG
+
+#include <QtCore/QDebug>
+#include <QTime>
+
+#ifdef WIN32
+    #define __PRETTY_FUNCTION__ __FUNCTION__
+#endif
+
+
+struct StampedDebug : QDebug
+{
+	StampedDebug( QtMsgType type, const QByteArray& file, uint line, QByteArray function ) : QDebug( type )
+	{
+		Q_UNUSED( line );
+        Q_UNUSED( file );
+
+		QByteArray out;
+
+		#if __GNUG__
+        int const k = function.indexOf( '(' );
+		int const m = function.mid( 0, k ).lastIndexOf( "::" ); // work with ctors and dtors
+		int const n = m == -1 ? 0 : function.lastIndexOf( ' ', m ) + 1;
+		function = function.mid( n, k - n );
+		#endif
+
+		out += function + "()";
+        
+        *this << out.data();
+	}
+};
+
+#define qDebug() StampedDebug( QtDebugMsg, __FILE__, __LINE__, __PRETTY_FUNCTION__ )
+#define qWarning() StampedDebug( QtWarningMsg, __FILE__, __LINE__, __PRETTY_FUNCTION__ )
+#define qCritical() StampedDebug( QtCriticalMsg, __FILE__, __LINE__, __PRETTY_FUNCTION__ )
+
+#endif
