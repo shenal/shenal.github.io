@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: GSoC | Shenal Silva's Blog]]></title>
+  <link href="http://shenal.github.io/blog/categories/gsoc/atom.xml" rel="self"/>
+  <link href="http://shenal.github.io/"/>
+  <updated>2013-12-27T10:07:37+05:30</updated>
+  <id>http://shenal.github.io/</id>
+  <author>
+    <name><![CDATA[Shenal Silva]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Started with GSoC 2014]]></title>
+    <link href="http://shenal.github.io/blog/2013/12/26/getting-started-with-gsoc-2014/"/>
+    <updated>2013-12-26T09:59:00+05:30</updated>
+    <id>http://shenal.github.io/blog/2013/12/26/getting-started-with-gsoc-2014</id>
+    <content type="html"><![CDATA[<h3>GSoC</h3>
+
+<p>I didnt know about GSoC until I was halfway through my first year. It was only after reading Ramidu ayya blog which made me realise that anyone can work for google (even though indirectly)</p>
+]]></content>
+  </entry>
+  
+</feed>
